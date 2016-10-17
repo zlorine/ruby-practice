@@ -19,19 +19,19 @@ attr_accessor :position
 
     def move(room)
         @position = room
-        each room do |room|
+        @position.each do |room|
         puts "You have entered the #{name} room. #{text}" 
         end
     end   
 
-    def enterRoom(room)
-        
+    def get_input_move
+        puts "Where would you like to go?"
+        @input = gets.chomp
+        if @position.exits.key?(@input)
+            puts "bella"
+        end
+        puts @position.exits
     end
-
-    def leaveRoom
-
-    end
-
 
 
     def no_door
@@ -45,6 +45,9 @@ attr_accessor :position
 
     def where
         puts @position.name
+        # @position.each do |room|
+        #     print room.exits
+        # end
     end
 
     def minusOne
@@ -54,7 +57,8 @@ attr_accessor :position
     def dies
         puts "aaaaaand you die. Sorry dude."
         exit #find the method to end the game
-    endz
+    end
+
 
 end
 
@@ -65,6 +69,7 @@ class Room
     
     def initialize(name,exits,text="")
         @name = name
+        @exits = exits
         @text = text
     end
 
@@ -73,4 +78,6 @@ end
 
 round = GameofRooms.new
 
-puts round.position.name
+puts round.where
+round.get_input_move
+puts round.where
