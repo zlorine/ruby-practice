@@ -32,18 +32,20 @@ attr_accessor :position
            
 
         elsif 
-           puts "You can't go in that direction"         
+           puts "You can't go in that direction"  
+           get_input_move  
+           # move to diffenrent method     
         end
 
-        # puts @position.exits
+
     end
  
     def move(room)
         
-        puts room.name
         @position = room
-        puts @position.name
-        puts room.name
+        puts @position.text
+
+        get_input_move
         # puts "You have entered the #{name} room. #{text}" 
         
     end   
