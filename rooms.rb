@@ -14,29 +14,31 @@ attr_accessor :position
             @position = @rooms[0]    
 
         end
-
-
-
-    def move(room)
-        @position = room
-        @position.each do |room|
-        puts "You have entered the #{name} room. #{text}" 
-        end
-    end   
+  
 
     def get_input_move
         puts "Where would you like to go?"
         @input = gets.chomp
         if @position.exits.key?(@input)
-            puts "bella"
+           roomName = @position.exits[@input]
+           room = @position.select {|selectedRoom| selectedRoom.name == roomName } 
+           self.class.move(room)
+           
+
+        elsif 
+           puts "You can't go in that direction"         
         end
-        puts @position.exits
+
+        # puts @position.exits
     end
 
-
-    def no_door
-        puts "You can't go in that direction"
+    def self.move(room)
+        @position = room
+        @position.each do |room|
+        puts "You have entered the #{name} room. #{text}" 
+        end
     end
+ 
     
     def no_command
         puts "Sorry, I don't understand that"
@@ -80,4 +82,4 @@ round = GameofRooms.new
 
 puts round.where
 round.get_input_move
-puts round.where
+# puts round.where
