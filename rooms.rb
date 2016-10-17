@@ -1,10 +1,37 @@
-class Room
-    attr_reader :name
-    
-    def initialize(name,possible_directions)
-        @name = name
-        @possible_directions = []
+class GameofRooms
+attr_accessor :position
+
+        def initialize
+
+            @rooms = [ 
+                Room.new("Red",{"s" => "Green", "e" => "Blue"},"it's a red room"),
+                Room.new("Blue",{"w" => "Red", "e" => "Patio", "s" => "Yellow"},"it's a blue room"),
+                Room.new("Yellow",{"e" => "Patio", "n" => "Blue", "w" => "Green"},"it's a yellow room"),
+                Room.new("Green",{"n" => "Red", "e" => "Yellow"},"it's a green room"),
+                Room.new("Patio",{"s" => "Green", "w" => "Blue"},"lovely garden")
+            ]
+
+            @position = @rooms[0]    
+
+        end
+
+
+
+    def move(room)
+        @position = room
+        each room do |room|
+        puts "You have entered the #{name} room. #{text}" 
+        end
+    end   
+
+    def enterRoom(room)
+        
     end
+
+    def leaveRoom
+
+    end
+
 
 
     def no_door
@@ -15,36 +42,6 @@ class Room
         puts "Sorry, I don't understand that"
     end
 
-    def describeRoom(roomDescription)
-        @roomDescription = roomDescription
-    end
-
-    def enterRoom(room)
-        puts "You have entered the #{name} room." 
-        puts @roomDescription
-    end
-
-    def leaveRoom
-
-    end
-
-
-end
-
-class RedRoom < Room
-
-
-    end
-
-class Dylan
-attr_reader :position
-    
-    def initialize
-        @position = "red_room"
-        @lifes = 3
-        puts "Hi Dylan. You are in the red room"
-
-    end
 
     def where
         puts @position.name
@@ -57,27 +54,23 @@ attr_reader :position
     def dies
         puts "aaaaaand you die. Sorry dude."
         exit #find the method to end the game
-    end
-
-    def move(room)
-        @position = room
-        room.enterRoom(room)
-    end    
+    endz
 
 end
 
 
 
+class Room
+    attr_accessor :name, :exits, :text
+    
+    def initialize(name,exits,text="")
+        @name = name
+        @text = text
+    end
 
-red_room = Room.new("Red",["e", "s"])
-blue_room = Room.new("Blue",["e", "s", "w"])
-yellow_room = Room.new("Yellow",["e", "n", "w"])
-green_room = Room.new("Green",["e", "n"])
-open_room = Room.new("Patio",["s", "w"])
+end
 
-blue_room.describeRoom("It's a very nice room")
 
-dylan = Dylan.new
+round = GameofRooms.new
 
-dylan.move(blue_room)
-puts dylan.where
+puts round.position.name
