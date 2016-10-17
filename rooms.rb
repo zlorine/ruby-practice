@@ -18,7 +18,7 @@ attr_accessor :position
     
      @position = @rooms[0]  
      get_input_move
-     
+
     end   
 
 
@@ -28,7 +28,7 @@ attr_accessor :position
         if @position.exits.key?(@input)
            roomName = @position.exits[@input]
            room = @rooms.find {|selectedRoom| selectedRoom.name == roomName } 
-           self.class.move(room)
+           move(room)
            
 
         elsif 
@@ -38,7 +38,7 @@ attr_accessor :position
         # puts @position.exits
     end
  
-    def self.move(room)
+    def move(room)
         
         puts room.name
         @position = room
