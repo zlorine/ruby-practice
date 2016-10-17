@@ -10,18 +10,24 @@ attr_accessor :position
                 Room.new("Green",{"n" => "Red", "e" => "Yellow"},"it's a green room"),
                 Room.new("Patio",{"s" => "Green", "w" => "Blue"},"lovely garden")
             ]
-
-            @position = @rooms[0]    
-
+             
         end
-  
+
+
+    def startGame
+    
+     @position = @rooms[0]  
+     get_input_move
+     
+    end   
+
 
     def get_input_move
         puts "Where would you like to go?"
         @input = gets.chomp
         if @position.exits.key?(@input)
            roomName = @position.exits[@input]
-           room = @position.select {|selectedRoom| selectedRoom.name == roomName } 
+           room = @rooms.find {|selectedRoom| selectedRoom.name == roomName } 
            self.class.move(room)
            
 
@@ -31,15 +37,17 @@ attr_accessor :position
 
         # puts @position.exits
     end
-
-    def self.move(room)
-        @position = room
-        @position.each do |room|
-        puts "You have entered the #{name} room. #{text}" 
-        end
-    end
  
-    
+    def self.move(room)
+        
+        puts room.name
+        @position = room
+        puts @position.name
+        puts room.name
+        # puts "You have entered the #{name} room. #{text}" 
+        
+    end   
+
     def no_command
         puts "Sorry, I don't understand that"
     end
@@ -79,7 +87,7 @@ end
 
 
 round = GameofRooms.new
-
-puts round.where
-round.get_input_move
+round.startGame
 # puts round.where
+# round.get_input_move
+puts round.where
